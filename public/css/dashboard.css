@@ -1,6 +1,31 @@
+:root {
+    --accent-color: #3498db;
+    --white: #ffffff;
+    --subtext-color: #757575;
+}
+
 body {
     background-color: var(--white);
-    color: var(--text-color);
+    color: var(--white);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: none; 
+}
+
+.menu-icon {
+    cursor: pointer;
 }
 
 .dashboard {
@@ -10,10 +35,11 @@ body {
     gap: 10px; 
     height: 100vh;
     width: 100vw;
+    padding-top: 0;
 }
 
 .profile {
-    background: linear-gradient(to top, var(--background-color), hsl(211, 47%, 91%));
+    background: linear-gradient(to top, hsl(221, 85%, 59%), var(--accent-color));
     grid-row: 1 / span 3;
     grid-column: 1;
     display: flex;
@@ -25,7 +51,7 @@ body {
 }
 
 .banner {
-    background: linear-gradient(to right, var(--background-color), hsl(211, 47%, 91%));
+    background: linear-gradient(to left, hsl(221, 85%, 59%), var(--accent-color));
     grid-row: 1; 
     grid-column: 2;
     display: flex;
@@ -34,14 +60,29 @@ body {
 }
 
 .banner-img > img {
-    height: 30vh;
+    height: 20vh;
     width: auto;
 }
 
 .grades {
     background-color: hsl(211, 47%, 91%);
-    grid-row: 2 span;
+    grid-row: 2;
     grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.1fr 1fr 1fr;
+    gap: 1rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-color: var(--accent-color) #e0e0e0;
+    scrollbar-width: thin;
+}
+
+.grades > h2 {
+    margin: 1rem;
+    color: var(--subtext-color);
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 .cards {
@@ -55,6 +96,7 @@ body {
     align-items: center;
     gap: 0.5rem;
     justify-content: center;
+    color: var(--white);
 }
 
 .details > img {
@@ -65,12 +107,18 @@ body {
     font-size: 2rem;
 }
 
-.details > .email {
-    color: var(--subtext-color);
+.dash-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    background-color: transparent;
+    color: white;
 }
 
-button {
-    width: 80%;
+.dash-button:hover {
+    background-color: var(--background-color);
 }
 
 .banner-text {
@@ -87,6 +135,12 @@ button {
     font-size: 30px;
 } 
 
+.button-icon {
+    padding: 0;
+    margin: 0;
+    width: 30px;
+}
+
 #logout {
     width: 100%;
 }
@@ -97,11 +151,6 @@ button {
 
 .buttons {
     width: 100%;
-}
-
-.danger {
-    background-color: rgb(130, 0, 0);
-    color: white;
 }
 
 .danger:hover {
@@ -143,10 +192,7 @@ button {
     align-items: center;
     width: 50px;
     height: 50px;
-}
-
-.edit {
-    background-color: var(--background-color);
+    background-color: transparent;
 }
 
 .edit:hover {
@@ -157,29 +203,97 @@ button {
     height: 40px;
 }
 
-#studentList {
-    max-height: 53vh;
-    overflow-y: scroll;
+.grade {
+    margin: 1rem;
+    border-radius: 10px;
+    background: linear-gradient(to left, hsl(221, 85%, 59%), var(--accent-color));
 }
 
-@media (max-width: 768px) {
-    .profile {
-        display: none;
-    }
+.scores {
+    display: flex;
+    width: 100%;
+    margin: 1rem;
+}
 
-    .banner {
-        grid-column-start: 1;
-        grid-column-end: 3;
-    }
+.score, .score-secured {
+    margin: 1rem;
+    width: 50%;
+}
 
-    .grades {
-        grid-column-start: 1;
-        grid-column-end: 3;
-    }
+.scores h4 {
+    font-size: 22px;
+}
+
+.scores h5 {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.heading {
+    grid-row: 1;
+    grid-column: 1 / 3;
+}
+
+#studentList {
+    grid-row: 2 / 4;
+    grid-column: 1 / 3;
+}
+
+.blue {
+    background: linear-gradient(to left, hsl(221, 85%, 59%), var(--accent-color));
 }
 
 @media (max-width: 1200px) {
     .dashboard {
         grid-template-columns: 1fr 3fr; 
+    }
+
+    .scores {
+        flex-direction: column;
+    }
+
+    .banner-text {
+        font-size: 40px;
+    }
+
+    .banner-text > .date {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        display: block;
+    }
+
+    .dashboard {
+        padding-top: 60px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .banner, .grades, .profile {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .banner-text {
+        font-size: 20px;
+    }
+
+    .banner-text > .date {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    .grades {
+        grid-template-columns: 100%;
+    }
+
+    .grade {
+        grid-column: 1;
     }
 }

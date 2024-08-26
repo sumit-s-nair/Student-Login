@@ -8,8 +8,9 @@
     <title>Dashboard</title>
 </head>
 <body>
+    <header><div class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></div></header>
     <section class="dashboard">
-        <div class="profile cards">
+        <div class="profile cards" id="profile">
             <div class="details">
                 <img src="/assets/icons/minimal-profile-account-symbol-user-interface-theme-3d-icon-rendering-illustration-isolated-in-transparent-background-png.webp">
                 <h2 class="name"><%= name %></h2>
@@ -17,12 +18,12 @@
             </div>
             <div class="buttons">
                 <form id="logout" action="/logout" method="POST">
-                    <button type="submit" class="secondary-button">Logout</button>
+                    <button type="submit" class="dash-button"> <div class="button-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg></div><div>Logout</div> </button>
                 </form>
-                <button class="secondary-button danger" id="deleteAccountButton">Delete Account</button>
+                <button class="dash-button danger" id="deleteAccountButton"><div class="button-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></div> <div>Delete Account</div> </button>
             </div>
         </div>
-        <div class="banner cards">
+        <div class="banner cards" id="banner">
             <div class="banner-text">
                 <div class="date"><p><%= date %></p></div>
                 <div>
@@ -33,10 +34,63 @@
                 <img src="/assets/images/student.png" alt="">
             </div>
         </div>
-        <div class="grades cards">
-
+        <div class="grades cards" id="grades">
+            <h2>Student Grades</h2>
+            <div class="math grade">
+                <h3>Math</h3>
+                <div class="scores">
+                    <div class="score">
+                        <h4>Total Marks</h4>
+                        <h5>100</h5>
+                    </div>
+                    <div class="score-secured">
+                        <h4>Marks Secured</h4>
+                        <h5><%= math %></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="science grade">
+                <h3>Science</h3>
+                <div class="scores">
+                    <div class="score">
+                        <h4>Total Marks</h4>
+                        <h5>100</h5>
+                    </div>
+                    <div class="score-secured">
+                        <h4>Marks Secured</h4>
+                        <h5><%= science %></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="english grade">
+                <h3>English</h3>
+                <div class="scores">
+                    <div class="score">
+                        <h4>Total Marks</h4>
+                        <h5>100</h5>
+                    </div>
+                    <div class="score-secured">
+                        <h4>Marks Secured</h4>
+                        <h5><%= english %></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="history grade">
+                <h3>History</h3>
+                <div class="scores">
+                    <div class="score">
+                        <h4>Total Marks</h4>
+                        <h5>100</h5>
+                    </div>
+                    <div class="score-secured">
+                        <h4>Marks Secured</h4>
+                        <h5><%= history %></h5>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <script src="/js/delete-user.js" type="module"></script>
+    <script src="/js/dashboard.js" type="module"></script>
 </body>
 </html>

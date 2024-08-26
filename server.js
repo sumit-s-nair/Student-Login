@@ -46,23 +46,25 @@ app.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).send('Invalid email or password');
+            return res.render('login', { message: 'Invalid email' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).send('Invalid email or password');
+            return res.render('login', { message: 'Invalid password' });
         }
 
+        // Set session variables
         req.session.userId = user._id;
         req.session.userRole = user.role;
         req.session.userName = user.name;
         req.session.userEmail = user.email;
 
+        // Redirect based on role
         return res.redirect(user.role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
+        console.error('Login error:', error);
+        res.status(500).render('login', { message: 'Server error. Please try again later.' });
     }
 });
 
@@ -100,21 +102,37 @@ app.get('/admin/dashboard', requireAuth, async (req, res) => {
 });
 
 // User dashboard route
-app.get('/user/dashboard', requireAuth, (req, res) => {
+app.get('/user/dashboard', requireAuth, async (req, res) => {
     if (req.session.userRole !== 'user') {
         return res.status(403).send('Access denied');
     }
 
-    const today = new Date();
-    const options = { day: 'numeric', month: 'short', year: 'numeric' };
-    const date = today.toLocaleDateString('en-GB', options).replace(',', '');
+    try {
+        const today = new Date();
+        const options = { day: 'numeric', month: 'short', year: 'numeric' };
+        const date = today.toLocaleDateString('en-GB', options).replace(',', '');
 
-    res.render('dashboard', {
-        name: req.session.userName,
-        email: req.session.userEmail,
-        date: date
-    }); 
+        const user = await User.findById(req.session.userId);
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        res.render('dashboard', {
+            name: user.name,
+            email: user.email,
+            date: date,
+            math: user.subjects.math,
+            science: user.subjects.science,
+            english: user.subjects.english,
+            history: user.subjects.history
+        });
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
 
 // User signup route
 app.post('/signup', async (req, res) => {
@@ -236,11 +254,11 @@ app.put('/admin/edit-user/:id', async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    res.render('login');
+    res.render('login', { message: "" });
 });
 
 app.get("/login", (req, res) => {
-    res.render('login');
+    res.render('login', { message: "" });
 });
 
 app.get("/signup", (req, res) => {
