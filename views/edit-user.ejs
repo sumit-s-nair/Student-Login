@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student Marks</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Marks for <%= user.name %></h1>
+        <form action="/admin/edit-user/<%= user._id %>" method="POST">
+            <div class="form-group">
+                <label for="math">Math:</label>
+                <input type="number" id="math" name="math" value="<%= user.subjects.math %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="science">Science:</label>
+                <input type="number" id="science" name="science" value="<%= user.subjects.science %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="english">English:</label>
+                <input type="number" id="english" name="english" value="<%= user.subjects.english %>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="history">History:</label>
+                <input type="number" id="history" name="history" value="<%= user.subjects.history %>" required>
+            </div>
+
+            <button type="submit" class="primary-button">Save Changes</button>
+            <a href="/admin/dashboard" class="secondary-button">Cancel</a>
+            <a href="/admin/dashboard" class="back-button">Back to Admin Page</a>
+        </form>
+    </div>
+</body>
+</html>

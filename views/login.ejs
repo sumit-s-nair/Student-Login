@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Something Academy</title>
+  </head>
+
+  <body>
+    <section class="auth">
+      <div class="card">
+        <div class="student-portal">
+          <div class="text">
+            <h1>Login</h1>
+            <p>Enter your login credentials</p>
+          </div>
+          <div class="form">
+            <form method="post" action="/login">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Enter your Email"
+                required
+              />
+              <label for="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Enter your Password"
+                required
+              />
+              <button class="primary-button" type="submit">Login</button>
+            </form>
+            <form action="/signup">
+              <button class="secondary-button" type="submit">Sign Up</button>
+            </form>
+          </div>
+        </div>
+        <div class="image">
+          <div class="image-holder">
+            <h2>Welcome to the Student portal</h2>
+            <img
+              src="/assets/images/enter-login-and-password-registration-page-on-screen-sign-in-to-your-account.png"
+              alt="Image"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

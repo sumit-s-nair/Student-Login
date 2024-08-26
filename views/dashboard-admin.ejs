@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <section class="dashboard">
+        <div class="profile cards">
+            <div class="details">
+                <img src="/assets/icons/minimal-profile-account-symbol-user-interface-theme-3d-icon-rendering-illustration-isolated-in-transparent-background-png.webp" alt="Profile Image">
+                <h2 class="name"><%= name %></h2>
+                <h3 class="email"><%= email %></h3>
+            </div>
+            <div class="buttons">
+                <form id="logout" action="/logout" method="POST">
+                    <button type="submit" class="secondary-button">Logout</button>
+                </form>
+                <button class="secondary-button danger" id="deleteAccountButton">Delete Account</button>
+            </div>
+        </div>
+        <div class="banner cards">
+            <div class="banner-text">
+                <div class="date"><p><%= date %></p></div>
+                <div>
+                    Welcome back, <%= name %>!
+                </div>
+            </div>
+            <div class="banner-img">
+                <img src="/assets/images/student.png" alt="Banner Image">
+            </div>
+        </div>
+        <div class="grades cards">
+            <h3>Student List</h3>
+            <div id="studentList">
+                <% students.forEach(student => { %>
+                    <div class="student">
+                        <div class="button">
+                            <img src="/assets/icons/minimal-profile-account-symbol-user-interface-theme-3d-icon-rendering-illustration-isolated-in-transparent-background-png.webp">
+                            <p><%= student.name %></p>
+                        </div>
+                        <div class="button">
+                            <button class="danger icon" data-id="<%= student._id %>">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                            </button>
+                            <button class="edit icon" data-id="<%= student._id %>">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+    <script src="/js/delete-user.js" type="module"></script>
+</body>
+</html>

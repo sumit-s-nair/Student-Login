@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <section class="dashboard">
+        <div class="profile cards">
+            <div class="details">
+                <img src="/assets/icons/minimal-profile-account-symbol-user-interface-theme-3d-icon-rendering-illustration-isolated-in-transparent-background-png.webp">
+                <h2 class="name"><%= name %></h2>
+                <h3 class="email"><%= email%></h3>
+            </div>
+            <div class="buttons">
+                <form id="logout" action="/logout" method="POST">
+                    <button type="submit" class="secondary-button">Logout</button>
+                </form>
+                <button class="secondary-button danger" id="deleteAccountButton">Delete Account</button>
+            </div>
+        </div>
+        <div class="banner cards">
+            <div class="banner-text">
+                <div class="date"><p><%= date %></p></div>
+                <div>
+                    Welcome back, <%= name %>!
+                </div>
+            </div>
+            <div class="banner-img">
+                <img src="/assets/images/student.png" alt="">
+            </div>
+        </div>
+        <div class="grades cards">
+
+        </div>
+    </section>
+    <script src="/js/delete-user.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+body {
+    background-color: var(--white);
+    color: var(--text-color);
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 4fr; 
+    grid-template-rows: 1fr 5fr; 
+    gap: 10px; 
+    height: 100vh;
+    width: 100vw;
+}
+
+.profile {
+    background: linear-gradient(to top, var(--background-color), hsl(211, 47%, 91%));
+    grid-row: 1 / span 3;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    gap: 1rem;
+}
+
+.banner {
+    background: linear-gradient(to right, var(--background-color), hsl(211, 47%, 91%));
+    grid-row: 1; 
+    grid-column: 2;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.banner-img > img {
+    height: 30vh;
+    width: auto;
+}
+
+.grades {
+    background-color: hsl(211, 47%, 91%);
+    grid-row: 2 span;
+    grid-column: 2;
+}
+
+.cards {
+    margin: 1rem;
+    border-radius: 10px;    
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.details > img {
+    width: 12vw;
+}
+
+.details > h2 {
+    font-size: 2rem;
+}
+
+.details > .email {
+    color: var(--subtext-color);
+}
+
+button {
+    width: 80%;
+}
+
+.banner-text {
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.banner-text > .date {
+    font-size: 30px;
+} 
+
+#logout {
+    width: 100%;
+}
+
+.secondary-button {
+    width: 100%;
+}
+
+.buttons {
+    width: 100%;
+}
+
+.danger {
+    background-color: rgb(130, 0, 0);
+    color: white;
+}
+
+.danger:hover {
+    background-color: rgba(153, 0, 0, 0.749);
+}
+
+.grades h3 {
+    margin: 1rem;
+    font-size: 30px;
+}
+
+.student {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.student p {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.student:hover {
+    background-color: hsla(221, 100%, 87%, 0.802);
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin: 1rem;
+    gap: 10px;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+
+.edit {
+    background-color: var(--background-color);
+}
+
+.edit:hover {
+    background-color: hsla(221, 77%, 74%, 0.596);
+}
+
+.button img {
+    height: 40px;
+}
+
+#studentList {
+    max-height: 53vh;
+    overflow-y: scroll;
+}
+
+@media (max-width: 768px) {
+    .profile {
+        display: none;
+    }
+
+    .banner {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .grades {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+}
+
+@media (max-width: 1200px) {
+    .dashboard {
+        grid-template-columns: 1fr 3fr; 
+    }
+}

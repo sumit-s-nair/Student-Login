@@ -1,0 +1,251 @@
+:root {
+    --accent-color: hsl(233, 73%, 35%);
+    --text-color: hsl(0, 0%, 24%);
+    --background-color: hsl(221, 78%, 74%);
+    --subtext-color: hsl(225, 2%, 37%);
+    --white: hsl(0, 0%, 100%);
+    --body-font: "Montserrat", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    background-color: var(--background-color);
+    font-family: var(--body-font);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+}
+
+/* Auth Section */
+.auth {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* Card Container */
+.card {
+    display: flex;
+    flex-direction: row;
+    background-color: hsl(218, 100%, 95%);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 90vw; 
+    height: 70vh;
+    max-width: 1200px;
+    max-height: 800px;
+    aspect-ratio: 4/3;
+}
+
+/* Student Portal Section */
+.student-portal {
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    flex: 1;
+    justify-content: space-around;
+}
+
+.text h1 {
+    color: var(--text-color);
+    font-size: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.text p {
+    color: var(--subtext-color);
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Form Styles */
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+label {
+    color: var(--text-color);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+input {
+    border: none;
+    font-weight: 600;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--accent-color);
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--text-color);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input::placeholder {
+    color: var(--subtext-color);
+}
+
+input:focus {
+    outline: none;
+}
+
+/* Button Styles */
+button {
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.primary-button {
+    font-weight: 700;
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+.primary-button:hover {
+    background-color: hsl(233, 73%, 30%);
+}
+
+.secondary-button {
+    font-weight: 700;
+    background-color: hsl(218, 100%, 95%);
+}
+
+.secondary-button:hover {
+    background-color: hsl(218, 100%, 90%);
+}
+
+/* Image Section */
+.image {
+    background-color: hsl(218, 100, 90);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    color: var(--white);
+    flex: 1;
+    text-align: center;
+}
+
+.image-holder h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.image-holder img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; 
+}
+
+.card-success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 70vw;
+    height: 70vh;
+    background-color: var(--white);
+    color: var(--text-color);
+    border-radius: 10px;
+}
+
+.card-success h1 {
+    font-size: 3rem;
+}
+
+.card-success button{
+    width: 300px;
+}
+
+/* Larger Screens */
+@media (min-width: 1200px) {
+    .card {
+        width: 80vw;
+        height: 80vh;
+        max-width: 1400px;
+        max-height: 900px;
+    }
+
+    .text h1 {
+        font-size: 2.5rem;
+    }
+
+    .image-holder h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Tablet Devices */
+@media (max-width: 1024px) {
+    
+    .text h1{
+        margin-top: 0.2rem;
+    }
+
+    .card {
+        flex-direction: column-reverse;
+        width: 80vw;
+        height: 90vh;
+        max-width: 1000px;
+    }
+
+    .image-holder img {
+        width: 20rem;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    .card {
+        width: 90vw;
+        height: 90vh;
+        flex-direction: column-reverse;
+    }
+
+    .text h1 {
+        font-size: 2.5rem;
+    }
+
+    .image-holder h2 {
+        font-size: 1.5rem;
+    }
+
+    .card-success h1 {
+        font-size: 2rem;
+    }
+}
