@@ -15,7 +15,7 @@
 
 /* Body Styles */
 body {
-    background-color: var(--background-color);
+    background: linear-gradient(to left, hsl(221, 85%, 59%), var(--accent-color));
     font-family: var(--body-font);
     height: 100vh;
     display: flex;
@@ -133,7 +133,7 @@ button {
 }
 
 .primary-button:hover {
-    background-color: hsl(233, 73%, 30%);
+    background-color: #3498dbb9;
 }
 
 .secondary-button {

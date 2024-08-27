@@ -4,7 +4,8 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { dirname } from 'path';
 import session from 'express-session';
-import User from './models/users';
+import { body, validationResult } from 'express-validator';
+import User from './models/users';  // Adjust the path as necessary
 import bcrypt from 'bcryptjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -27,6 +28,14 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+
+// Middleware to check if user is admin
+function requireAdmin(req, res, next) {
+    if (req.session.userRole !== 'admin') {
+        return res.redirect('/');
+    }
+    next();
+}
 
 const mongoURL = 'mongodb://localhost:27017/Mini-Project';
 
@@ -60,7 +69,7 @@ app.post('/login', async (req, res) => {
         req.session.userName = user.name;
         req.session.userEmail = user.email;
 
-        // Redirect based on role
+        // Redirecting based on role
         return res.redirect(user.role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
     } catch (error) {
         console.error('Login error:', error);
@@ -125,7 +134,7 @@ app.get('/user/dashboard', requireAuth, async (req, res) => {
             math: user.subjects.math,
             science: user.subjects.science,
             english: user.subjects.english,
-            history: user.subjects.history
+            webdev: user.subjects.webdev
         });
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -156,7 +165,7 @@ app.post('/signup', async (req, res) => {
                 math: Math.floor(Math.random() * 101),
                 science: Math.floor(Math.random() * 101),
                 english: Math.floor(Math.random() * 101),
-                history: Math.floor(Math.random() * 101)
+                webdev: Math.floor(Math.random() * 101)
             }
         });
         await newUser.save();
@@ -180,7 +189,7 @@ app.post('/logout', (req, res) => {
     });
 });
 
-app.delete('/delete', async (req, res) => {
+app.delete('/delete', requireAuth, async (req, res) => {
     try {
         const userId = req.session.userId;
 
@@ -205,7 +214,7 @@ app.delete('/delete', async (req, res) => {
     }
 });
 
-app.delete('/admin/delete-user/:id', async (req, res) => {
+app.delete('/admin/delete-user/:id', requireAdmin, async (req, res) => {
     try {
         const { id } = req.params;
         await User.findByIdAndDelete(id);
@@ -216,7 +225,7 @@ app.delete('/admin/delete-user/:id', async (req, res) => {
     }
 });
 
-app.get('/admin/edit-user/:id', async (req, res) => {
+app.get('/admin/edit-user/:id', requireAdmin, async (req, res) => {
     try {
         const { id } = req.params;
         const user = await User.findById(id);
@@ -232,26 +241,29 @@ app.get('/admin/edit-user/:id', async (req, res) => {
     }
 });
 
-app.put('/admin/edit-user/:id', async (req, res) => {
+app.put('/admin/edit-user/:id', requireAdmin, async (req, res) => {
     const { id } = req.params;
-    const { math, science, english, history } = req.body;
+    const { math, science, english, webdev } = req.body;
 
     try {
-        await User.findByIdAndUpdate(id, {
-            subjects: {
-                math: parseInt(math),
-                science: parseInt(science),
-                english: parseInt(english),
-                history: parseInt(history)
-            }
-        });
+        const updatedUser = await User.findByIdAndUpdate(id, {
+            'subjects.math': math,
+            'subjects.science': science,
+            'subjects.english': english,
+            'subjects.webdev': webdev,
+        }, { new: true });
 
-        res.redirect('/admin/dashboard');
+        if (!updatedUser) {
+            return res.status(404).send('User not found');
+        }
+
+        res.status(200).send('User marks updated successfully');
     } catch (error) {
-        console.error(error);
+        console.error('Error updating user marks:', error);
         res.status(500).send('Server error');
     }
 });
+
 
 app.get("/", (req, res) => {
     res.render('login', { message: "" });
