@@ -5,8 +5,12 @@ import path from 'path';
 import { dirname } from 'path';
 import session from 'express-session';
 import { body, validationResult } from 'express-validator';
-import User from './models/users';  // Adjust the path as necessary
+import User from './models/users';
 import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: './project.env' })
+const mongoUri = process.env.MONGO_URI;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -37,10 +41,8 @@ function requireAdmin(req, res, next) {
     next();
 }
 
-const mongoURL = 'mongodb://localhost:27017/Mini-Project';
-
 // MongoDB connection
-mongoose.connect(mongoURL)
+mongoose.connect(mongoUri)
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -245,25 +247,28 @@ app.put('/admin/edit-user/:id', requireAdmin, async (req, res) => {
     const { id } = req.params;
     const { math, science, english, webdev } = req.body;
 
-    try {
-        const updatedUser = await User.findByIdAndUpdate(id, {
-            'subjects.math': math,
-            'subjects.science': science,
-            'subjects.english': english,
-            'subjects.webdev': webdev,
-        }, { new: true });
-
-        if (!updatedUser) {
-            return res.status(404).send('User not found');
+    if (math <= 100 && science <= 100 && english <= 100 && webdev <= 100) {
+        try {
+            const updatedUser = await User.findByIdAndUpdate(id, {
+                'subjects.math': math,
+                'subjects.science': science,
+                'subjects.english': english,
+                'subjects.webdev': webdev,
+            }, { new: true });
+    
+            if (!updatedUser) {
+                return res.status(404).send('User not found');
+            }
+    
+            res.status(200).send('User marks updated successfully');
+        } catch (error) {
+            console.error('Error updating user marks:', error);
+            res.status(500).send('Server error');
         }
-
-        res.status(200).send('User marks updated successfully');
-    } catch (error) {
-        console.error('Error updating user marks:', error);
-        res.status(500).send('Server error');
+    } else {
+        res.status(400).send('Marks cannot be above 100');
     }
 });
-
 
 app.get("/", (req, res) => {
     res.render('login', { message: "" });
