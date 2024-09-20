@@ -9,7 +9,7 @@ import User from './models/users';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: './project.env' })
+dotenv.config({ path: './process.env' })
 const mongoUri = process.env.MONGO_URI;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
