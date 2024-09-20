@@ -15,7 +15,7 @@ const mongoUri = process.env.MONGO_URI;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const saltRounds = 10;
 
 app.set('view engine', 'ejs');
