@@ -53,7 +53,7 @@ Ensure you have the following installed:
 
 5. Start the application:
    ```bash
-   npm start
+   nodemon server.js
    ```
 
 6. Visit `http://localhost:3000/login` to access the application.
