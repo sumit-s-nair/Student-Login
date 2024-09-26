@@ -48,7 +48,6 @@ Ensure you have the following installed:
    Create a `.env` file in the root directory with the following content:
    ```bash
    MONGODB_URI=mongodb://localhost:27017/student-login
-   SESSION_SECRET=yourSecretKey
    ```
 
 5. Start the application:
